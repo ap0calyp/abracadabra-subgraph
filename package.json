@@ -1,0 +1,18 @@
+{
+  "name": "abramainnetfees",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "create-local": "graph create --node http://localhost:8020/ abramainnetfees",
+    "remove-local": "graph remove --node http://localhost:8020/ abramainnetfees",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 abramainnetfees",
+    "deploy:mainnet": "graph deploy --node https://api.studio.thegraph.com/deploy/ abramainnetfees abra-mainnet.yaml",
+    "prepare:mainnet": "mustache config/mainnet.json abra-mainnet.yaml > subgraph.yaml"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.25.1",
+    "@graphprotocol/graph-ts": "0.24.1",
+    "mustache": "^4.2.0"
+  }
+}

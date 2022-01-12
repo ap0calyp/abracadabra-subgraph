@@ -1,0 +1,25 @@
+type CauldronFee @entity {
+  id: ID!
+  totalBorrowElastic: BigDecimal!
+  accrueInfoFeesEarned: BigDecimal!
+  accrueInfoFeesWithdrawn: BigDecimal!
+  masterContract: String!
+  bentoBox: String!
+  symbol: String!
+}
+
+type UserLiquidation @entity {
+  id: ID!
+  timestamp: BigInt!
+  user: String!
+  transaction: String!
+  exchangeRate: BigDecimal!
+  collateralRemoved: BigDecimal!
+  loanRepaid: BigDecimal!
+  cauldron: String!
+}
+
+type ExchangeRate @entity {
+  id: ID!
+  rate: BigDecimal!
+}
