@@ -3,12 +3,12 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: degenbox
-    network: mainnet
+    name: bentobox
+    network: avalanche
     source:
-      address: "0xd96f48665a1410C0cd669A88898ecA36B9Fc2cce"
+      address: "0xf4f46382c2be1603dc817551ff9a7b333ed1d18f"
       abi: degenbox
-      startBlock: 13418156
+      startBlock: 3621838
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -20,15 +20,15 @@ dataSources:
           file: ./abis/degenbox.json
       eventHandlers:
         - event: LogDeploy(indexed address,bytes,indexed address)
-          handler: handleLogDeployMainnet
+          handler: handleLogDeployAvalanche
       file: ./src/degenbox.ts
   - kind: ethereum
-    name: bentobox
-    network: mainnet
+    name: degenbox
+    network: avalanche
     source:
-      address: "0xf5bce5077908a1b7370b9ae04adc565ebd643966"
+      address: "0x1fC83f75499b7620d53757f0b01E2ae626aAE530"
       abi: degenbox
-      startBlock: 12094175
+      startBlock: 5633933
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -40,12 +40,12 @@ dataSources:
           file: ./abis/degenbox.json
       eventHandlers:
         - event: LogDeploy(indexed address,bytes,indexed address)
-          handler: handleLogDeployMainnet
+          handler: handleLogDeployAvalanche
       file: ./src/degenbox.ts
 templates:
   - kind: ethereum
     name: cauldron
-    network: mainnet
+    network: avalanche
     source:
       abi: cauldron
     mapping:
@@ -66,12 +66,20 @@ templates:
           handler: handleLogAccrue
         - event: LogBorrow(indexed address,indexed address,uint256,uint256)
           handler: handleLogBorrow
+        - event: LogBorrow(address,address,uint256,uint256)
+          handler: handleLogBorrow
         - event: LogRepay(indexed address,indexed address,uint256,uint256)
           handler: handleLogRepay
+        - event: LogRepay(address,address,uint256,uint256)
+          handler: handleLogRepay
         - event: LogWithdrawFees(indexed address,uint256)
+          handler: handleLogWithdrawFees
+        - event: LogWithdrawFees(address,uint256)
           handler: handleLogWithdrawFees
         - event: LogExchangeRate(uint256)
           handler: handleLogExchangeRate
         - event: LogRemoveCollateral(indexed address,indexed address,uint256)
+          handler: handleLogRemoveCollateral
+        - event: LogRemoveCollateral(address,address,uint256)
           handler: handleLogRemoveCollateral
       file: ./src/cauldron.ts

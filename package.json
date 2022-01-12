@@ -7,12 +7,24 @@
     "create-local": "graph create --node http://localhost:8020/ abramainnetfees",
     "remove-local": "graph remove --node http://localhost:8020/ abramainnetfees",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 abramainnetfees",
-    "deploy:mainnet": "graph deploy --node https://api.studio.thegraph.com/deploy/ abramainnetfees abra-mainnet.yaml",
-    "prepare:mainnet": "mustache config/mainnet.json abra-mainnet.yaml > subgraph.yaml"
+
+    "deploy:mainnet": "graph deploy --product hosted-service ap0calyp/abracadabra-mainnet-fees abra-mainnet.yaml",
+    "deploy:arbitrum": "graph deploy --product hosted-service ap0calyp/abracadabra-arbitrum-fees abra-arbitrum.yaml",
+    "deploy:avalanche": "graph deploy --product hosted-service ap0calyp/abracadabra-avalanche-fees abra-avalanche.yaml",
+    "deploy:bsc": "graph deploy --product hosted-service ap0calyp/abracadabra-binancesmartchain-fees abra-bsc.yaml",
+    "deploy:fantom": "graph deploy --product hosted-service ap0calyp/abracadabra-fantom-fees abra-fantom.yaml",
+
+    "prepare:mainnet": "mustache config/mainnet.json abra-mainnet.yaml > subgraph.yaml",
+    "prepare:arbitrum": "mustache config/arbitrum.json abra-arbitrum.yaml > subgraph.yaml",
+    "prepare:avalanche": "mustache config/avalanche.json abra-avalanche.yaml > subgraph.yaml",
+    "prepare:bsc": "mustache config/avalanche.json abra-bsc.yaml > subgraph.yaml",
+    "prepare:fantom": "mustache config/fantom.json abra-fantom.yaml > subgraph.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.25.1",
-    "@graphprotocol/graph-ts": "0.24.1",
+    "@graphprotocol/graph-ts": "0.24.1"
+  },
+  "devDependencies": {
     "mustache": "^4.2.0"
   }
 }

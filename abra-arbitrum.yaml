@@ -3,32 +3,12 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: degenbox
-    network: mainnet
-    source:
-      address: "0xd96f48665a1410C0cd669A88898ecA36B9Fc2cce"
-      abi: degenbox
-      startBlock: 13418156
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      entities:
-        - CauldronFees
-      abis:
-        - name: degenbox
-          file: ./abis/degenbox.json
-      eventHandlers:
-        - event: LogDeploy(indexed address,bytes,indexed address)
-          handler: handleLogDeployMainnet
-      file: ./src/degenbox.ts
-  - kind: ethereum
     name: bentobox
-    network: mainnet
+    network: arbitrum-one
     source:
-      address: "0xf5bce5077908a1b7370b9ae04adc565ebd643966"
+      address: "0x74c764D41B77DBbb4fe771daB1939B00b146894A"
       abi: degenbox
-      startBlock: 12094175
+      startBlock: 229409
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -40,12 +20,12 @@ dataSources:
           file: ./abis/degenbox.json
       eventHandlers:
         - event: LogDeploy(indexed address,bytes,indexed address)
-          handler: handleLogDeployMainnet
+          handler: handleLogDeployArbitrum
       file: ./src/degenbox.ts
 templates:
   - kind: ethereum
     name: cauldron
-    network: mainnet
+    network: arbitrum-one
     source:
       abi: cauldron
     mapping:

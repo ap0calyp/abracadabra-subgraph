@@ -1,4 +1,5 @@
 import { BigDecimal, BigInt } from '@graphprotocol/graph-ts'
+import { Address } from '@graphprotocol/graph-ts/common/numbers'
 import {
   cauldron as cauldronContract,
   LogAccrue,
@@ -9,9 +10,6 @@ import {
   LogWithdrawFees,
 } from '../generated/cauldron/cauldron'
 import { CauldronFee, ExchangeRate, UserLiquidation } from '../generated/schema'
-import { LogDeploy } from '../generated/degenbox/degenbox'
-import { Address } from '@graphprotocol/graph-ts/common/numbers'
-import { cauldron } from '../generated/templates'
 import { erc20 } from '../generated/templates/StandardToken/erc20'
 import { cauldronMediumRiskV1 } from '../generated/templates/cauldron/cauldronMediumRiskV1'
 
@@ -132,19 +130,4 @@ export function handleLogExchangeRate(event: LogExchangeRate): void {
   let exchangeRate = getExchangeRate(cauldron)
   exchangeRate.rate = event.params.rate.divDecimal(EIGHTEEN_DECIMALS)
   exchangeRate.save()
-}
-
-
-// watching bento box for master contract deployments
-export function handleLogDeploy(event: LogDeploy): void {
-  let masterContracts = [
-      '0x63905bb681b9e68682f392df2b22b7170f78d300'.toUpperCase(), // CauldronV2Flat
-      '0x476b1E35DDE474cB9Aa1f6B85c9Cc589BFa85c1F'.toUpperCase(), // CauldronV2
-      '0x1df188958a8674b5177f77667b8d173c3cdd9e51'.toUpperCase(), // CauldronV2CheckpointV1
-      '0x4a9cb5d0b755275fd188f87c0a8df531b0c7c7d2'.toUpperCase(), // CauldronMediumRiskV1
-      '0x469a991a6bb8cbbfee42e7ab846edeef1bc0b3d3'.toUpperCase(), // CauldronLowRiskV1
-  ]
-  if (masterContracts.indexOf(event.params.masterContract.toHex().toUpperCase()) > -1) {
-    cauldron.create(event.params.cloneAddress)
-  }
 }
