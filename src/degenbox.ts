@@ -19,7 +19,6 @@ export function handleLogDeployMainnet(event: LogDeploy): void {
 export function handleLogDeployFantom(event: LogDeploy): void {
     let masterContracts = [
         '0xe802823719f9d2520415854e6f95bae498ff1d52'.toUpperCase(), // CauldronV2FTM
-        '0x99d8a9c45b2eca8864373a26d1459e3dff1e17f3'.toUpperCase(), // KashiPairMediumRiskV2
     ]
     if (masterContracts.indexOf(event.params.masterContract.toHex().toUpperCase()) > -1) {
         cauldron.create(event.params.cloneAddress)
