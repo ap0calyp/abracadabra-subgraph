@@ -21,7 +21,7 @@ dataSources:
           file: ./abis/degenbox.json
       eventHandlers:
         - event: LogDeploy(indexed address,bytes,indexed address)
-          handler: handleLogDeployFantom
+          handler: handleLogDeploy
       file: ./src/degenbox.ts
   - kind: ethereum
     name: degenbox
@@ -41,7 +41,7 @@ dataSources:
           file: ./abis/degenbox.json
       eventHandlers:
         - event: LogDeploy(indexed address,bytes,indexed address)
-          handler: handleLogDeployFantom
+          handler: handleLogDeploy
       file: ./src/degenbox.ts
 templates:
   - kind: ethereum
@@ -62,6 +62,8 @@ templates:
           file: ./abis/cauldronMediumRiskV1.json
         - name: erc20
           file: ./abis/erc20.json
+        - name: degenbox
+          file: ./abis/degenbox.json
       eventHandlers:
         - event: LogAccrue(uint128)
           handler: handleLogAccrue

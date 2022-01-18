@@ -5,7 +5,8 @@ type CauldronFee @entity {
   accrueInfoFeesWithdrawn: BigDecimal!
   masterContract: String!
   bentoBox: String!
-  symbol: String!
+  collateralSymbol: String!
+  collateralName: String!
 }
 
 type UserLiquidation @entity {
@@ -16,7 +17,8 @@ type UserLiquidation @entity {
   exchangeRate: BigDecimal!
   collateralRemoved: BigDecimal!
   loanRepaid: BigDecimal!
-  cauldron: String!
+  cauldron: CauldronFee!
+  direct: Boolean!
 }
 
 type ExchangeRate @entity {
