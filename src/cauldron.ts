@@ -107,8 +107,10 @@ export function handleLogRepay(event: LogRepay): void {
 
   // liquidation handler
   const invoker = event.transaction.from.toHex().toLowerCase()
+  const address = event.address.toHex().toLowerCase()
+  const to = event.transaction.to ? (event.transaction.to as Address).toHex().toLowerCase() : null;
   const user = event.params.to.toHex().toLowerCase()
-  if (invoker != user) {
+  if ([invoker, address, to].indexOf(user) == -1) {
     const txHash = event.transaction.hash.toHex()
     const userLiquidation = getUserLiquidation(user, txHash)
     const exchangeRate = getExchangeRate(event.address.toHex())
@@ -130,8 +132,10 @@ export function handleLogWithdrawFees(event: LogWithdrawFees): void {
 
 export function handleLogRemoveCollateral(event: LogRemoveCollateral): void {
   const invoker = event.transaction.from.toHex().toLowerCase()
+  const address = event.address.toHex().toLowerCase()
+  const to = event.transaction.to ? (event.transaction.to as Address).toHex().toLowerCase() : null;
   const user = event.params.from.toHex().toLowerCase()
-  if (invoker != user) {
+  if ([invoker, address, to].indexOf(user) == -1) {
     const txHash = event.transaction.hash.toHex()
     const userLiquidation = getUserLiquidation(user, txHash)
     const deployedCauldron = cauldronContract.bind(event.address)
