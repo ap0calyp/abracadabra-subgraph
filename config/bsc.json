@@ -1,1 +1,11 @@
-{}
+{
+  "network": "bsc",
+  "bentobox": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "startBlock": 12750891
+  },
+  "degenbox": {
+    "address": "0x090185f2135308BaD17527004364eBcC2D37e5F6",
+    "startBlock": 12750891
+  }
+}
