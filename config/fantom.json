@@ -1,1 +1,11 @@
-{}
+{
+  "network": "fantom",
+  "bentobox": {
+    "address": "0xf5bce5077908a1b7370b9ae04adc565ebd643966",
+    "startBlock": 11216452
+  },
+  "degenbox": {
+    "address": "0x74A0BcA2eeEdf8883cb91E37e9ff49430f20a616",
+    "startBlock": 17010677
+  }
+}

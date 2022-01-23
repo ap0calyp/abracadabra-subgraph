@@ -4,11 +4,31 @@ schema:
 dataSources:
   - kind: ethereum
     name: degenbox
-    network: bsc
+    network: {{ network }}
     source:
-      address: "0x090185f2135308BaD17527004364eBcC2D37e5F6"
+      address: '{{ degenbox.address }}'
       abi: degenbox
-      startBlock: 12750891
+      startBlock: {{ degenbox.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - CauldronFees
+      abis:
+        - name: degenbox
+          file: ./abis/degenbox.json
+      eventHandlers:
+        - event: LogDeploy(indexed address,bytes,indexed address)
+          handler: handleLogDeploy
+      file: ./src/degenbox.ts
+  - kind: ethereum
+    name: bentobox
+    network: {{ network }}
+    source:
+      address: '{{ bentobox.address }}'
+      abi: degenbox
+      startBlock: {{ bentobox.startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -25,7 +45,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: cauldron
-    network: bsc
+    network: {{ network }}
     source:
       abi: cauldron
     mapping:
