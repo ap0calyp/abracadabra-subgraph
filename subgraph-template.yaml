@@ -76,4 +76,7 @@ templates:
           handler: handleLogExchangeRate
         - event: LogRemoveCollateral(indexed address,indexed address,uint256)
           handler: handleLogRemoveCollateral
+      callHandlers:
+        - function: liquidate(address[],uint256[],address,address)
+          handler: handleLiquidateCall
       file: ./src/cauldron.ts

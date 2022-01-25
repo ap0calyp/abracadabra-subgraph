@@ -1,7 +1,7 @@
 import { BigDecimal, BigInt } from '@graphprotocol/graph-ts'
 import { Address } from '@graphprotocol/graph-ts/common/numbers'
 import {
-  cauldron as cauldronContract,
+  cauldron as cauldronContract, LiquidateCall,
   LogAccrue,
   LogBorrow,
   LogExchangeRate,
@@ -146,6 +146,9 @@ export function handleLogRemoveCollateral(event: LogRemoveCollateral): void {
         .divDecimal(decimals(deployedErc.decimals()))
     userLiquidation.cauldron = event.address.toHex()
     userLiquidation.collateralRemoved = collateralRemoved
+    userLiquidation.invoker = invoker
+    userLiquidation.to = to
+    userLiquidation.address = address
     userLiquidation.save()
   }
 }
@@ -155,4 +158,15 @@ export function handleLogExchangeRate(event: LogExchangeRate): void {
   const exchangeRate = getExchangeRate(cauldron)
   exchangeRate.rate = event.params.rate.divDecimal(EIGHTEEN_DECIMALS)
   exchangeRate.save()
+}
+
+export function handleLiquidateCall(call: LiquidateCall): void {
+  const users = call.inputs.users
+
+  for(let i = 0; i < users.length; i++) {
+    const user = users[i]
+    const userLiquidation = getUserLiquidation(user.toHex().toLowerCase(), call.transaction.hash.toHex().toLowerCase())
+    userLiquidation.direct = true
+    userLiquidation.save()
+  }
 }

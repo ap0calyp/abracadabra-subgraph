@@ -19,6 +19,9 @@ type UserLiquidation @entity {
   loanRepaid: BigDecimal!
   cauldron: CauldronFee!
   direct: Boolean!
+  invoker: String
+  to: String
+  address: String
 }
 
 type ExchangeRate @entity {
